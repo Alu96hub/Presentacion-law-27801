@@ -11,6 +11,7 @@
             --primary-color: #34495e;
             --border-color: #e2e8f0;
             --card-bg: #ffffff;
+            --sub-bg: #f8fafc;
             --color-a: #27ae60;       /* A verde */
             --color-b: #c0392b;       /* B rojo */
             --color-res1: #2ecc71;    /* 1 verde */
@@ -29,7 +30,7 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
         }
 
@@ -52,6 +53,12 @@
             transition: box-shadow 0.2s ease;
         }
 
+        details details {
+            background: var(--sub-bg);
+            margin: 15px 0;
+            border: 1px solid #cbd5e1;
+        }
+
         details:hover {
             box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
@@ -64,6 +71,12 @@
             outline: none;
             user-select: none;
             color: var(--primary-color);
+        }
+
+        details details summary {
+            font-size: 1.05rem;
+            color: #1e293b;
+            padding: 15px;
         }
 
         summary::-webkit-details-marker {
@@ -109,22 +122,21 @@
             background: #fafbfc;
         }
 
-        /* Estilos para los juegos de circuitos lógicos */
+        /* Estilos para los circuitos lógicos laterales en árbol */
         .circuit-box {
-            background: #f8fafc;
+            background: #ffffff;
             border: 1px solid var(--border-color);
             border-radius: 6px;
             padding: 20px;
             margin-top: 15px;
-            text-align: center;
         }
 
         .circuit-btn {
             background-color: var(--primary-color);
             color: white;
             border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
+            padding: 8px 16px;
+            font-size: 0.95rem;
             border-radius: 4px;
             cursor: pointer;
             transition: background 0.2s;
@@ -135,27 +147,39 @@
             background-color: #1a252f;
         }
 
-        .circuit-display {
+        .tree-container {
             display: flex;
-            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        .branches {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .branch-group {
+            display: flex;
             align-items: center;
             gap: 15px;
-            margin-top: 15px;
-            font-weight: 600;
-            font-size: 1.1rem;
         }
 
         .node {
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 4px;
             color: white;
-            opacity: 0.3;
-            transition: opacity 0.3s ease, transform 0.2s ease;
+            opacity: 0.25; /* Tenues por defecto */
+            transition: opacity 0.3s ease, transform 0.2s ease, background-color 0.3s ease;
+            text-align: center;
+            min-width: 25px;
         }
 
         .node.active {
             opacity: 1;
-            transform: scale(1.05);
+            transform: scale(1.08);
         }
 
         /* Colores de nodos */
@@ -166,7 +190,7 @@
         .node-3 { background-color: var(--color-res3); }
         .node-4 { background-color: var(--color-res4); color: #2c3e50; }
 
-        .arrow {
+        .tree-line {
             color: #95a5a6;
             font-weight: bold;
         }
@@ -177,7 +201,7 @@
 <div class="container">
     <h1>Youth Criminal Regime (Law 27.801)</h1>
 
-    <!-- SECTION 1: Summary -->
+    <!-- SECTION 1: Summary (Independiente) -->
     <details>
         <summary>Summary</summary>
         <div class="content-wrapper">
@@ -185,150 +209,164 @@
                 <p>The Argentine government, through Law 27.801, officially regulated the new Youth Criminal Regime, lowering the age of criminal responsibility from 16 to 14 years old. Under this law, teenagers from 14 to 17 can face criminal charges, but they are kept in a separate system away from adults. The new rules focus mostly on education, rehabilitation, and alternative punishments like community work or electronic monitoring instead of prison, especially for minor crimes. For the most serious crimes, judges can give a maximum prison sentence of 15 years, but life imprisonment is completely banned.</p>
             </div>
             <div class="image-side">
-                <!-- Cambia 'imagen1.jpg' por el nombre de tu archivo de imagen -->
                 <img src="imagen1.jpg" alt="Summary illustration" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                 <div class="image-placeholder" style="display:none;">imagen1.jpg</div>
             </div>
         </div>
     </details>
 
-    <!-- SECTION 2: Opinion -->
+    <!-- SECTION 2: Opinion (Contenedor principal) -->
     <details>
         <summary>Opinion</summary>
-        <div class="content-wrapper">
-            <div class="text-side">
-                <p>To present another point of view, I am against this new law. A law that allows a greater number of young people to be processed as adults—even though they are not yet fully developed cognitively—harms their rights much more than it helps them reintegrate into society.</p>
-            </div>
-        </div>
-    </details>
+        <div style="padding: 0 20px 20px 20px;">
+            <p>To present another point of view, I am against this new law. A law that allows a greater number of young people to be processed as adults—even though they are not yet fully developed cognitively—harms their rights much more than it helps them reintegrate into society.</p>
 
-    <!-- SECTION 3: First Circuit Game -->
-    <details>
-        <summary>Argument: System Capacity & Objectives</summary>
-        <div class="content-wrapper">
-            <div class="text-side">
-                <p>First, increasing the number of inmates with individuals who are still developing does not guarantee that the stated objectives will be met, even if more funds are allocated.</p>
-                
-                <!-- Primer Circuito Logico -->
-                <div class="circuit-box">
-                    <button class="circuit-btn" onclick="runCircuit1()">START Circuit 1</button>
-                    <div class="circuit-display">
-                        <span>Start</span>
-                        <span class="arrow">→</span>
-                        <div id="c1-choice" class="node">Choice</div>
-                        <span class="arrow">→</span>
-                        <div id="c1-result" class="node">Result</div>
+            <!-- Sub-desplegable 1: Primer Argumento con los dos circuitos uno debajo del otro -->
+            <details>
+                <summary>Argument 1: System Capacity & Objectives</summary>
+                <div class="content-wrapper">
+                    <div class="text-side">
+                        <p>First, increasing the number of inmates with individuals who are still developing does not guarantee that the stated objectives will be met, even if more funds are allocated.</p>
+                        
+                        <!-- Circuito Lateral 1 (50% A->1 o B->2) -->
+                        <div class="circuit-box">
+                            <button class="circuit-btn" onclick="runCircuit1()">START Circuit 1</button>
+                            <div class="tree-container">
+                                <div>Start</div>
+                                <span class="tree-line">→</span>
+                                <div class="branches">
+                                    <div class="branch-group">
+                                        <div id="c1-a" class="node node-a">A</div>
+                                        <span class="tree-line">→</span>
+                                        <div id="c1-res1" class="node node-1">1</div>
+                                    </div>
+                                    <div class="branch-group">
+                                        <div id="c1-b" class="node node-b">B</div>
+                                        <span class="tree-line">→</span>
+                                        <div id="c1-res2" class="node node-2">2</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Circuito Lateral 2 (50% A/B y 25% para cada resultado 1, 2, 3, 4) -->
+                        <div class="circuit-box">
+                            <button class="circuit-btn" onclick="runCircuit2()">START Circuit 2</button>
+                            <div class="tree-container">
+                                <div>Start</div>
+                                <span class="tree-line">→</span>
+                                <div class="branches">
+                                    <div class="branch-group">
+                                        <div id="c2-a" class="node node-a">A</div>
+                                        <span class="tree-line">→</span>
+                                        <div>
+                                            <div id="c2-res1" class="node node-1" style="margin-bottom: 5px;">1</div>
+                                            <div id="c2-res2" class="node node-2">2</div>
+                                        </div>
+                                    </div>
+                                    <div class="branch-group">
+                                        <div id="c2-b" class="node node-b">B</div>
+                                        <span class="tree-line">→</span>
+                                        <div>
+                                            <div id="c2-res3" class="node node-3" style="margin-bottom: 5px;">3</div>
+                                            <div id="c2-res4" class="node node-4">4</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-            </div>
-        </div>
-    </details>
+            </details>
 
-    <!-- SECTION 4: Second Circuit Game -->
-    <details>
-        <summary>Argument: Human & Children's Rights</summary>
-        <div class="content-wrapper">
-            <div class="text-side">
-                <p>Second, this reform is a step backward for human and children's rights. The child is once again viewed as a "small adult," just like at the beginning of the 20th century and earlier times.</p>
-                
-                <!-- Segundo Circuito Logico -->
-                <div class="circuit-box">
-                    <button class="circuit-btn" onclick="runCircuit2()">START Circuit 2</button>
-                    <div class="circuit-display">
-                        <span>Start</span>
-                        <span class="arrow">→</span>
-                        <div id="c2-choice" class="node">Choice</div>
-                        <span class="arrow">→</span>
-                        <div id="c2-result" class="node">Result</div>
+            <!-- Sub-desplegable 2: Segundo Argumento con Imagen -->
+            <details>
+                <summary>Argument 2: Human & Children's Rights</summary>
+                <div class="content-wrapper">
+                    <div class="text-side">
+                        <p>Second, this reform is a step backward for human and children's rights. The child is once again viewed as a "small adult," just like at the beginning of the 20th century and earlier times.</p>
+                    </div>
+                    <div class="image-side">
+                        <img src="imagen2.jpg" alt="Opinion illustration" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="image-placeholder" style="display:none;">imagen2.jpg</div>
                     </div>
                 </div>
-            </div>
-            <div class="image-side">
-                <!-- Cambia 'imagen2.jpg' por el nombre de tu archivo de imagen -->
-                <img src="imagen2.jpg" alt="Opinion illustration" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="image-placeholder" style="display:none;">imagen2.jpg</div>
-            </div>
-        </div>
-    </details>
+            </details>
 
-    <!-- SECTION 5: Conclusion -->
-    <details>
-        <summary>Conclusion</summary>
-        <div class="content-wrapper">
-            <div class="text-side">
-                <p>In conclusion, lowering the age of criminal responsibility while ignoring the fact that young people are still developing is another failure of the state, adding to the tragedy of a child committing a crime. The price is paid by cutting back on rights—something permanent that loses all connection to temporary emergencies.</p>
-            </div>
-            <div class="image-side">
-                <!-- Cambia 'imagen3.jpg' por el nombre de tu archivo de imagen -->
-                <img src="imagen3.jpg" alt="Conclusion illustration" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="image-placeholder" style="display:none;">imagen3.jpg</div>
-            </div>
+            <!-- Sub-desplegable 3: Conclusión con Imagen -->
+            <details>
+                <summary>Conclusion</summary>
+                <div class="content-wrapper">
+                    <div class="text-side">
+                        <p>In conclusion, lowering the age of criminal responsibility while ignoring the fact that young people are still developing is another failure of the state, adding to the tragedy of a child committing a crime. The price is paid by cutting back on rights—something permanent that loses all connection to temporary emergencies.</p>
+                    </div>
+                    <div class="image-side">
+                        <img src="imagen3.jpg" alt="Conclusion illustration" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="image-placeholder" style="display:none;">imagen3.jpg</div>
+                    </div>
+                </div>
+            </details>
+
         </div>
     </details>
 
 </div>
 
 <script>
-    // Circuito 1: 50% A (conduce a 1), 50% B (conduce a 2)
+    // Lógica Circuito 1: 50% A->1 o B->2
     function runCircuit1() {
-        const choiceEl = document.getElementById('c1-choice');
-        const resultEl = document.getElementById('c1-result');
+        const elA = document.getElementById('c1-a');
+        const elB = document.getElementById('c1-b');
+        const elRes1 = document.getElementById('c1-res1');
+        const elRes2 = document.getElementById('c1-res2');
 
         // Reset
-        choiceEl.className = 'node';
-        resultEl.className = 'node';
+        elA.classList.remove('active');
+        elB.classList.remove('active');
+        elRes1.classList.remove('active');
+        elRes2.classList.remove('active');
 
-        // 50% de probabilidad
         const isA = Math.random() < 0.5;
 
         setTimeout(() => {
             if (isA) {
-                choiceEl.textContent = 'A';
-                choiceEl.classList.add('node-a', 'active');
-                
-                setTimeout(() => {
-                    resultEl.textContent = '1';
-                    resultEl.classList.add('node-1', 'active');
-                }, 300);
+                elA.classList.add('active');
+                elRes1.classList.add('active');
             } else {
-                choiceEl.textContent = 'B';
-                choiceEl.classList.add('node-b', 'active');
-                
-                setTimeout(() => {
-                    resultEl.textContent = '2';
-                    resultEl.classList.add('node-2', 'active');
-                }, 300);
+                elB.classList.add('active');
+                elRes2.classList.add('active');
             }
         }, 100);
     }
 
-    // Circuito 2: A o B al azar (50/50), y cada uno puede dar 1, 2, 3 o 4 (25% de probabilidad cada resultado)
+    // Lógica Circuito 2: 50% A o B, y 25% independiente para cada resultado 1, 2, 3, 4
     function runCircuit2() {
-        const choiceEl = document.getElementById('c2-choice');
-        const resultEl = document.getElementById('c2-result');
+        const elA = document.getElementById('c2-a');
+        const elB = document.getElementById('c2-b');
+        const results = [
+            document.getElementById('c2-res1'),
+            document.getElementById('c2-res2'),
+            document.getElementById('c2-res3'),
+            document.getElementById('c2-res4')
+        ];
 
         // Reset
-        choiceEl.className = 'node';
-        resultEl.className = 'node';
+        elA.classList.remove('active');
+        elB.classList.remove('active');
+        results.forEach(res => res.classList.remove('active'));
 
         const isA = Math.random() < 0.5;
-        // Resultado aleatorio entre 1, 2, 3 y 4 (25% c/u)
-        const randomRes = Math.floor(Math.random() * 4) + 1; 
+        const randomResIndex = Math.floor(Math.random() * 4);
 
         setTimeout(() => {
             if (isA) {
-                choiceEl.textContent = 'A';
-                choiceEl.classList.add('node-a', 'active');
+                elA.classList.add('active');
             } else {
-                choiceEl.textContent = 'B';
-                choiceEl.classList.add('node-b', 'active');
+                elB.classList.add('active');
             }
 
-            setTimeout(() => {
-                resultEl.textContent = randomRes;
-                resultEl.classList.add('node-' + randomRes, 'active');
-            }, 300);
-
+            results[randomResIndex].classList.add('active');
         }, 100);
     }
 </script>
