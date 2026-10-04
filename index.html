@@ -343,9 +343,13 @@
                         <p>Second, this reform is a step backward for human and children's rights. The child is once again viewed as a "small adult," just like at the beginning of the 20th century and earlier times.</p>
                     </div>
                     <div class="image-side">
-                        <img src="imagen2.jpg" alt="Opinion illustration" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <img src="imagen2.jpg" alt="Opinion illustration" onclick="openImageModal(this)" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="image-placeholder" style="display:none;">imagen2.jpg</div>
                     </div>
+                    <dialog id="imgModal" class="image-modal" onclick="closeImageModal()">
+    <button class="modal-close" onclick="closeImageModal()">&times;</button>
+    <img id="modalImg" src="" alt="Imagen ampliada">
+                    </dialog>
                 </div>
             </details>
 
@@ -357,9 +361,13 @@
                         <p>In conclusion, lowering the age of criminal responsibility while ignoring the fact that young people are still developing is another failure of the state, adding to the tragedy of a child committing a crime. The price is paid by cutting back on rights—something permanent that loses all connection to temporary emergencies.</p>
                     </div>
                     <div class="image-side">
-                        <img src="imagen3.jpg" alt="Conclusion illustration" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <img src="imagen3.jpg" alt="Conclusion illustration" onclick="openImageModal(this)" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="image-placeholder" style="display:none;">imagen3.jpg</div>
                     </div>
+                    <dialog id="imgModal" class="image-modal" onclick="closeImageModal()">
+    <button class="modal-close" onclick="closeImageModal()">&times;</button>
+    <img id="modalImg" src="" alt="Imagen ampliada">
+                    </dialog>
                 </div>
             </details>
 
